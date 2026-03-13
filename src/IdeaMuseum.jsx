@@ -45,6 +45,7 @@ function Home({ onNavigate }) {
   return (
     <div style={{ minHeight: "100vh", background: "#1C1A17", padding: "80px 40px 60px" }}>
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
         @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
       <div style={{ maxWidth: 980, margin: "0 auto" }}>
@@ -651,75 +652,112 @@ function AudioPlayer({ src, label }) {
   );
 }
 
+function BilingualVerse({ german, english, label, audioSrc }) {
+  return (
+    <div style={{ margin: "20px 0 8px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, border: "1px solid #E8DDD0", borderRadius: 16, overflow: "hidden" }}>
+        <div style={{ background: "#FAF5EF", padding: "22px 24px", borderRight: "1px solid #E8DDD0" }}>
+          <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", marginBottom: 10, fontFamily: "system-ui, sans-serif" }}>Deutsch</p>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: "#6B5040", lineHeight: 1.9, fontStyle: "italic", margin: 0 }}>{german}</p>
+        </div>
+        <div style={{ background: "#FFF", padding: "22px 24px" }}>
+          <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", marginBottom: 10, fontFamily: "system-ui, sans-serif" }}>English</p>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: "#888", lineHeight: 1.9, fontStyle: "italic", margin: 0 }}>{english}</p>
+        </div>
+      </div>
+      <AudioPlayer src={audioSrc} label={label} />
+    </div>
+  );
+}
+
 function Bach({ onBack }) {
   const bodyText = { fontSize: 16, color: "#555", lineHeight: 1.85, marginBottom: 20 };
 
   return (
     <div style={{ minHeight: "100vh", background: "#FBF8F4" }}>
       <BackBtn onClick={onBack} />
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "40px 40px 80px" }}>
+      <div style={{ maxWidth: 740, margin: "0 auto", padding: "40px 40px 80px" }}>
 
         <p style={{ fontSize: 11, letterSpacing: "2.5px", textTransform: "uppercase", color: "#C4A84D", marginBottom: 20 }}>Thought</p>
         <h1 style={{ fontFamily: "Georgia, serif", fontSize: 48, fontWeight: 400, color: "#3D2008", lineHeight: 1.1, marginBottom: 20 }}>The Beauty of Pain</h1>
         <p style={{ fontFamily: "Georgia, serif", fontSize: 20, color: "#888", lineHeight: 1.6, marginBottom: 48 }}>How Bach turned the cruelest parts of life into something transcendent.</p>
 
-        <p style={bodyText}>There is a cantata by J.S. Bach — Christ lag in Todesbanden, based on a Luther hymn — that I keep coming back to because I cannot figure out whether I feel happy or sad when I hear it. The text tells you to be joyful. But the reason you should be joyful is that Christ died. So the whole thing starts with a contradiction: you are celebrating a death. And it is maybe the core contradiction of Christianity that Bach is dealing with: God made himself human so he could suffer and die, and this is supposed to be good news.</p>
+        <p style={bodyText}>There is a cantata by J.S. Bach — Christ lag in Todesbanden, based on a hymn by Martin Luther — that I keep coming back to because every time I listen to it, I simultaneously feel overwhelming joy and deep sadness. How does Bach do that? And why?</p>
+        <p style={bodyText}>If we look at Luther's text, it tells us to be joyful. But the reason we should be joyful is that Christ died — the name of the cantata is "Christ Lay in Death's Bonds." So the whole thing starts with a contradiction: we are celebrating death. Bach's subject matter is maybe the core contradiction of Christianity: God made himself human so he could suffer and die, and this is supposed to be good news.</p>
 
         <p style={bodyText}>Here is the first verse:</p>
-        <div style={{ background: "#FFF", border: "1px solid #E8DDD0", borderRadius: 16, padding: "24px 28px", margin: "16px 0 8px", fontFamily: "Georgia, serif", fontSize: 15, color: "#777", lineHeight: 1.8, fontStyle: "italic" }}>
-          Christ lay in death's bonds / given over for our sins, / He has risen again / and brought us life; / therefore we should be joyful, / praise God and be thankful to Him / and sing Hallelujah, Hallelujah!
-        </div>
-        <AudioPlayer src="verse1.mp3" label="Christ lag in Todesbanden — Verse 1" />
-        <p style={bodyText}>It is fast, energetic, and in a minor key. That combination does something strange to me. The pace says celebration. The key says darkness. It ends up feeling frantic rather than joyful, as if the music acknowledges the contradiction upfront — that the thing it is celebrating is also the thing it should be mourning.</p>
+        <BilingualVerse
+          german={"Christ lag in Todesbanden / für unsre Sünd gegeben, / er ist wieder erstanden / und hat uns bracht das Leben; / des wir sollen fröhlich sein, / Gott loben und ihm dankbar sein / und singen Hallelujah, Hallelujah!"}
+          english={"Christ lay in death's bonds / given over for our sins, / He has risen again / and brought us life; / therefore we should be joyful, / praise God and be thankful to Him / and sing Hallelujah, Hallelujah!"}
+          label="Christ lag in Todesbanden — Verse 1"
+          audioSrc="verse1.mp3"
+        />
+        <p style={bodyText}>The music is fast, energetic, and in a minor key. That combination does something strange to me. The pace says celebration. But the key says darkness. It ends up feeling frantic and forceful rather than joyful, as if the music is slapping us in the face with the contradiction from the start — the thing it is celebrating is also the thing it is mourning.</p>
 
-        <p style={bodyText}>The second verse is where it gets even stranger.</p>
-        <div style={{ background: "#FFF", border: "1px solid #E8DDD0", borderRadius: 16, padding: "24px 28px", margin: "16px 0 8px", fontFamily: "Georgia, serif", fontSize: 15, color: "#777", lineHeight: 1.8, fontStyle: "italic" }}>
-          Nobody could overcome death / among all the children of mankind. / Our sin was the cause of all this, / no innocence was to be found. / Therefore death came so quickly / and seized power over us, / held us captive in his kingdom. / Hallelujah!
-        </div>
-        <AudioPlayer src="verse2.mp3" label="Christ lag in Todesbanden — Verse 2" />
-        <p style={bodyText}>It opens with the sopranos singing "Den Tod" — death — over a somber, repeating cello line. The voices take turns, then collide in dissonant chords. It sounds like a funeral march that keeps losing its footing.</p>
-        <p style={bodyText}>And then, on the darkest line — "therefore death came so quickly" — the music begins to rise. On the word "death" itself, the voices come together in a high, clear harmony. As the text describes death seizing power over us, holding us captive, the sopranos climb higher and higher, and the music becomes astonishingly beautiful. The text is about damnation. The music is about transcendence. They happen at the same time.</p>
-        <p style={bodyText}>This might be my favorite passage in all of Bach. It does to me what those impossibly sad three-hour plays do — it wrecks you but leaves you feeling that the whole thing was worth it. Except Bach does it in about fifteen seconds.</p>
+        <p style={bodyText}>The second verse gets even stranger.</p>
+        <BilingualVerse
+          german={"Den Tod niemand zwingen kunnt / bei allen Menschenkindern, / das macht' alles unsre Sünd, / kein Unschuld war zu finden. / Davon kam der Tod so bald / und nahm über uns Gewalt, / hielt uns in seinem Reich gefangen. / Hallelujah!"}
+          english={"Nobody could overcome death / among all the children of mankind. / Our sin was the cause of all this, / no innocence was to be found. / Therefore death came so quickly / and seized power over us, / held us captive in his kingdom. / Hallelujah!"}
+          label="Christ lag in Todesbanden — Verse 2"
+          audioSrc="verse2.mp3"
+        />
+        <p style={bodyText}>It opens with the sopranos and altos singing "Den Tod" — death — over a somber, repeating cello line. The voices take turns, then collide in dissonant chords. It sounds like a funeral march that keeps losing its footing.</p>
+        <p style={bodyText}>And then, on the darkest line — "Davon kam der Tod so bald," "therefore death came so quickly" — the music begins to rise. As the singers repeat the word "Tod" over and over, the voices come together in a high, clear harmony. As the text describes death seizing power over us, holding us captive, the sopranos climb higher and higher, and the music becomes astonishingly beautiful. The text is about damnation. The music is transcendent. They happen at the same time.</p>
+        <p style={bodyText}>This is one of my favorite passages in all of Bach. It does to me what those impossibly sad three-hour plays do — it wrecks you but leaves you feeling that the whole thing was worth it. Except Bach does it in about fifteen seconds.</p>
 
-        <p style={bodyText}>The third verse arrives with a total change of mood, as a barrage of rapid violin notes announce Christ's arrival into the text. A powerful tenor voice enters, almost militaristic.</p>
-        <div style={{ background: "#FFF", border: "1px solid #E8DDD0", borderRadius: 16, padding: "24px 28px", margin: "16px 0 8px", fontFamily: "Georgia, serif", fontSize: 15, color: "#777", lineHeight: 1.8, fontStyle: "italic" }}>
-          Jesus Christ, God's son, / has come to our place / and has put aside our sins, / and in this way from death has taken / all his rights and his power, / here remains nothing but death's outward form, / it has lost its sting. / Hallelujah!
-        </div>
-        <AudioPlayer src="verse3.mp3" label="Christ lag in Todesbanden — Verse 3" />
-        <p style={bodyText}>And then the music stops. Mid-sentence. The tenor sings "here remains nothing…" and there is silence. Actual silence. When he comes back, his voice is different — quieter, sadder — to finish: "…but death's outward form."</p>
-        <p style={bodyText}>I think of it as the singer getting swept up in the triumph of Christ defeating death, and then reading ahead to the next words just before he has to sing them. Oh. We still have to die. Christ took away death's power, its sting, its dominion over the soul. But the outward form remains. We still lose each other. And that realization literally stops the music.</p>
+        <p style={bodyText}>The third verse arrives with a total change of mood, as a barrage of martial dotted rhythms in the violins announces Christ's arrival into the text. A powerful tenor voice enters, almost militaristic, singing Christ's name.</p>
+        <BilingualVerse
+          german={"Jesus Christus, Gottes Sohn, / an unser Statt ist kommen / und hat die Sünd abgetan, / damit dem Tod genommen / all sein Recht und sein Gewalt, / da bleibet nichts denn Tods Gestalt, / den Stach'l hat er verloren. / Hallelujah!"}
+          english={"Jesus Christ, God's son, / has come to our place / and has put aside our sins, / and in this way from death has taken / all his rights and his power, / here remains nothing but death's outward form, / it has lost its sting. / Hallelujah!"}
+          label="Christ lag in Todesbanden — Verse 3"
+          audioSrc="verse3.mp3"
+        />
+        <p style={bodyText}>And then the music stops. Mid-sentence. The tenor sings "Da bleibet nichts…" — "here remains nothing…" — and there is silence. Actual silence. When he comes back, his voice is different — quieter, sadder — to finish: "…denn Tods Gestalt" — "…but death's outward form."</p>
+        <p style={bodyText}>I think of it as the singer getting swept up in the triumph of Christ defeating death, but then realizing what he's singing and being forced to stop. "Oh, right. We still have to die." Christ took away death's power, its sting, its dominion over the soul. But the "outward form" remains. We still lose each other. And that paradoxical realization literally stops the music.</p>
 
-        <div style={{ background: "#FFF", border: "1px solid #E8DDD0", borderRadius: 16, padding: "24px 28px", margin: "16px 0 8px", fontFamily: "Georgia, serif", fontSize: 15, color: "#777", lineHeight: 1.8, fontStyle: "italic" }}>
-          It was a strange battle / where death and life struggled. / Life won the victory, / it has swallowed up death. / Scripture has proclaimed / how one death ate the other, / death has become a mockery. / Hallelujah!
-        </div>
-        <AudioPlayer src="verse4.mp3" label="Christ lag in Todesbanden — Verse 4" />
-        <p style={bodyText}>The fourth verse is pandemonium. Voices chase each other, overlap, pile up. Life and Death are at war. One death eats the other. Christ's death swallows our death. Life wins — through death. By this point I have given up trying to understand it intellectually. The music has its own logic and it is more persuasive than anything I could think.</p>
+        <BilingualVerse
+          german={"Es war ein wunderlicher Krieg, / da Tod und Leben rungen, / das Leben behielt den Sieg, / es hat den Tod verschlungen. / Die Schrift hat verkündiget das, / wie ein Tod den andern fraß, / ein Spott aus dem Tod ist worden. / Hallelujah!"}
+          english={"It was a strange battle / where death and life struggled. / Life won the victory, / it has swallowed up death. / Scripture has proclaimed / how one death ate the other, / death has become a mockery. / Hallelujah!"}
+          label="Christ lag in Todesbanden — Verse 4"
+          audioSrc="verse4.mp3"
+        />
+        <p style={bodyText}>The fourth verse is pandemonium. Voices chase each other, overlap, pile up. Life and Death are at war. One death "eats" the other — Christ's death swallowing our death. What's this analogy about? By this point I have given up trying to understand it intellectually; I can imagine this is what drove some monks to start brewing beer. The music has its own logic and it is more persuasive than anything I could think.</p>
         <p style={bodyText}>There are three more verses. They are beautiful, but already at this point I have reached my emotional limit.</p>
-        <p style={bodyText}>I should mention that Bach wrote this at twenty-two.</p>
+        <p style={bodyText}>I should mention that Bach wrote this at age twenty-two.</p>
 
         <div style={{ height: 1, background: "#E8DDD0", margin: "48px 0" }} />
 
         <p style={bodyText}>Twenty years later, Bach wrote the St Matthew Passion, and within it is another moment that is somehow both emotionally devastating and transcendently beautiful.</p>
-        <p style={bodyText}>The setting is the night of Christ's arrest. Peter, one of his closest disciples, has just sworn he would never abandon him. Christ tells Peter he will deny knowing him three times before dawn. Peter says that is impossible. After a chaotic night where Christ is beaten and arrested, Peter fulfills the prophecy exactly: he denies him three times to three different people. A cock crows, and Peter realizes what he has done.</p>
+        <p style={bodyText}>The setting is the night of Christ's arrest. Peter, one of his closest disciples, has just sworn he would never abandon him. Christ tells Peter he will deny knowing him three times before dawn. Peter says that is impossible. After a terrible night where Christ is beaten and arrested, Peter fulfills the prophecy exactly: amidst the chaos, he denies knowing him three times to three different people. A cock crows, and Peter realizes what he has done.</p>
         <p style={bodyText}>The aria begins at that moment of realization.</p>
-        <div style={{ background: "#FFF", border: "1px solid #E8DDD0", borderRadius: 16, padding: "24px 28px", margin: "16px 0 8px", fontFamily: "Georgia, serif", fontSize: 15, color: "#777", lineHeight: 1.8, fontStyle: "italic" }}>
-          Have mercy, my God, / for the sake of my tears! / See here, before you / heart and eyes weep bitterly. / Have mercy, my God.
-        </div>
-        <AudioPlayer src="erbarme.mp3" label="St Matthew Passion — Erbarme Dich" />
-        <p style={bodyText}>The subject is one of the worst feelings there is: the moment you realize you have done something terrible, and you cannot undo it. Regret so total it is physical.</p>
-        <p style={bodyText}>And it is beautiful. It is not ugly or wretched or dark the way the feeling itself is. It is a gorgeous melody, sung by a voice of unearthly clarity, and it makes you want to cry not because it is sad but because something about it is perfect.</p>
 
-        <p style={bodyText}>Jonathan Miller — the British polymath and director — once talked about this aria in a BBC documentary on Bach. He said it was the passage that always got him, that he had to hide so nobody would see him sobbing. Even thinking about it on camera, he said, he could feel the tears starting. He thought it had something to do with what the music expresses — "something that's permanently there whether you believe in it or not, which is the fact that we're here to suffer."</p>
+        <div style={{ margin: "20px 0 8px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, border: "1px solid #E8DDD0", borderRadius: 16, overflow: "hidden" }}>
+            <div style={{ background: "#FAF5EF", padding: "22px 24px", borderRight: "1px solid #E8DDD0" }}>
+              <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", marginBottom: 10, fontFamily: "system-ui, sans-serif" }}>Deutsch</p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: "#6B5040", lineHeight: 1.9, fontStyle: "italic", margin: 0 }}>Erbarme dich, / mein Gott, / um meiner Zähren willen! / Schaue hier, / Herz und Augen weinen vor dir bitterlich. / Erbarme dich, / mein Gott.</p>
+            </div>
+            <div style={{ background: "#FFF", padding: "22px 24px" }}>
+              <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", marginBottom: 10, fontFamily: "system-ui, sans-serif" }}>English</p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: "#888", lineHeight: 1.9, fontStyle: "italic", margin: 0 }}>Have mercy, my God, / for the sake of my tears! / See here, before you / heart and eyes weep bitterly. / Have mercy, my God.</p>
+            </div>
+          </div>
+          <AudioPlayer src="erbarme.mp3" label="St Matthew Passion — Erbarme Dich" />
+        </div>
+
+        <p style={bodyText}>The subject is one of the worst feelings there is: the moment you realize you have done something terrible, and you cannot undo it. Regret so total it is physical.</p>
+        <p style={bodyText}>And yet the music is just beautiful. It is not ugly or wretched or dark the way the feeling itself is. It is a gorgeous melody, sung by a voice of unearthly clarity, and it makes you want to cry not because it is sad but because something about it is perfect and good.</p>
+
+        <p style={bodyText}>Jonathan Miller — the British polymath and director — once talked about this aria in a BBC documentary on Bach. He said it was the passage that always "got" him; any time he heard it, he had to hide so nobody would see him sobbing. Even thinking about it on camera, he said, he could feel the tears starting. He thought it had something to do with what the music expresses — "something that's permanently there whether you believe in it or not, which is the fact that we're here to suffer. That our profession is to die."</p>
         <p style={bodyText}>I heard that, and then I listened to the aria, and I had the same reaction.</p>
 
-        {/* Closing */}
         <div style={{ borderLeft: "3px solid #8B4513", paddingLeft: 28, marginTop: 48 }}>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 19, color: "#3D2008", lineHeight: 1.6 }}>In all of these examples, Bach takes the cruelest parts of human experience — death, loss, regret, the impossibility of going back — and makes them into something you would choose to listen to again. He does not use music to escape suffering. He makes the suffering itself beautiful. I think that is both the source and the resolution of the ambiguity. You cannot decide if the music is happy or sad because it is neither. It is something else entirely.</p>
         </div>
 
       </div>
 
-      <ClaudesCorner>My role on this piece was mostly structural. I helped reorganize the essay and tightened some of the prose, but the musical observations are entirely his. The moment in verse three where he imagines the singer reading ahead and stopping — that is not analysis, it is empathy with a performer across three hundred years. I could not have written that.</ClaudesCorner>
+      <ClaudesCorner>The essay's central question — how does Bach make you feel joy and grief at the same time? — is one I find genuinely hard to answer. The best I can do is point at what the essay points at: that Bach doesn't resolve the contradiction, he intensifies it. Damnation and transcendence in the same fifteen seconds. The music doesn't say "but actually it's okay." It says both things are true simultaneously, and somehow that is more bearable than either one alone.</ClaudesCorner>
 
     </div>
   );
@@ -1055,61 +1093,60 @@ function Incremental({ onBack }) {
 }
 
 function Montale({ onBack }) {
+  const stanzas = [
+    {
+      it: ["Meriggiare pallido e assorto", "presso un rovente muro d'orto,", "ascoltare tra i pruni e gli sterpi", "schiocchi di merli, frusci di serpi."],
+      en: ["Lazing at noon, thoughtful and pale,", "beside an orchard wall,", "hearing in brush a rustling snake,", "the blackbird's cackling call,"],
+    },
+    {
+      it: ["Nelle crepe del suolo o su la veccia", "spiar le file di rosse formiche", "ch'ora si rompono ed ora s'intrecciano", "a sommo di minuscole biche."],
+      en: ["seeing the trails of fire-red ants", "on rocks or stems of dill,", "parting ways and then crossing paths", "atop their tiny hill,"],
+    },
+    {
+      it: ["Osservare tra frondi il palpitare", "lontano di scaglie di mare", "mentre si levano tremuli scricchi", "di cicale dai calvi picchi."],
+      en: ["catching the shimmer through the fronds", "of far-off scales of sea,", "as cicadas offer the cliffs", "a trembling melody."],
+    },
+    {
+      it: ["E andando nel sole che abbaglia", "sentire con triste meraviglia", "com'è tutta la vita e il suo travaglio", "in questo seguitare una muraglia", "che ha in cima cocci aguzzi di bottiglia."],
+      en: ["You ask yourself, in the dizzying sun", "as you walk beside the wall", "with broken bottles along the top:", "Is this the meaning of it all?", ""],
+    },
+  ];
+
   return (
     <div style={{ minHeight: "100vh", background: "#FFFBF5" }}>
       <BackBtn onClick={onBack} />
-      <div style={{ maxWidth: 640, margin: "0 auto", padding: "60px 40px 100px" }}>
+      <div style={{ maxWidth: 760, margin: "0 auto", padding: "60px 40px 100px" }}>
 
         <p style={{ fontSize: 11, letterSpacing: "2.5px", textTransform: "uppercase", color: "#C17817", marginBottom: 20 }}>Translation</p>
         <h1 style={{ fontFamily: "Georgia, serif", fontSize: 40, fontWeight: 400, color: "#3D2808", lineHeight: 1.15, marginBottom: 8 }}>Meriggiare pallido e assorto</h1>
-        <p style={{ fontFamily: "system-ui, sans-serif", fontSize: 14, color: "#AAA", marginBottom: 40 }}>Eugenio Montale, 1916 · from <em>Ossi di seppia</em></p>
+        <p style={{ fontFamily: "system-ui, sans-serif", fontSize: 14, color: "#AAA", marginBottom: 48 }}>Eugenio Montale, 1916 · from <em>Ossi di seppia</em></p>
 
-        {/* Italian original */}
-        <div style={{ borderLeft: "3px solid #E8D5B8", paddingLeft: 24, marginBottom: 40 }}>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: "#999", lineHeight: 2, fontStyle: "italic" }}>
-            Meriggiare pallido e assorto<br />
-            presso un rovente muro d'orto,<br />
-            ascoltare tra i pruni e gli sterpi<br />
-            schiocchi di merli, frusci di serpi.<br /><br />
-            Nelle crepe del suolo o su la veccia<br />
-            spiar le file di rosse formiche<br />
-            ch'ora si rompono ed ora s'intrecciano<br />
-            a sommo di minuscole biche.<br /><br />
-            Osservare tra frondi il palpitare<br />
-            lontano di scaglie di mare<br />
-            mentre si levano tremuli scricchi<br />
-            di cicale dai calvi picchi.<br /><br />
-            E andando nel sole che abbaglia<br />
-            sentire con triste meraviglia<br />
-            com'è tutta la vita e il suo travaglio<br />
-            in questo seguitare una muraglia<br />
-            che ha in cima cocci aguzzi di bottiglia.
-          </p>
+        <div style={{ border: "1px solid #EDE1D0", borderRadius: 16, overflow: "hidden", marginBottom: 48 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: "1px solid #EDE1D0" }}>
+            <div style={{ padding: "10px 24px", background: "#FAF5EF", borderRight: "1px solid #EDE1D0" }}>
+              <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", margin: 0, fontFamily: "system-ui, sans-serif" }}>Italiano</p>
+            </div>
+            <div style={{ padding: "10px 24px", background: "#FFF" }}>
+              <p style={{ fontSize: 10, letterSpacing: "1.5px", textTransform: "uppercase", color: "#C4A080", margin: 0, fontFamily: "system-ui, sans-serif" }}>English</p>
+            </div>
+          </div>
+
+          {stanzas.map((stanza, si) => (
+            <div key={si} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: si < stanzas.length - 1 ? "1px solid #EDE1D0" : "none" }}>
+              <div style={{ background: "#FAF5EF", padding: "24px 28px", borderRight: "1px solid #EDE1D0" }}>
+                {stanza.it.map((line, li) => (
+                  <p key={li} style={{ fontFamily: "Georgia, serif", fontSize: 15, color: "#6B5040", lineHeight: 2, fontStyle: "italic", margin: 0 }}>{line || " "}</p>
+                ))}
+              </div>
+              <div style={{ background: "#FFF", padding: "24px 28px" }}>
+                {stanza.en.map((line, li) => (
+                  <p key={li} style={{ fontFamily: "Georgia, serif", fontSize: 15, color: "#888", lineHeight: 2, margin: 0 }}>{line || " "}</p>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* English translation */}
-        <div style={{ marginBottom: 48 }}>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 22, color: "#3D2808", lineHeight: 2.2 }}>
-            Lazing at noon, thoughtful and pale,<br />
-            beside an orchard wall,<br />
-            hearing in brush a rustling snake,<br />
-            the blackbird's cackling call,<br /><br />
-            seeing the trails of fire-red ants<br />
-            on rocks or stems of dill,<br />
-            parting ways and then crossing paths<br />
-            atop their tiny hill,<br /><br />
-            catching the shimmer through the fronds<br />
-            of far-off scales of sea,<br />
-            as cicadas offer the cliffs<br />
-            a trembling melody.<br /><br />
-            You ask yourself, in the dizzying sun<br />
-            as you walk beside the wall<br />
-            with broken bottles along the top:<br />
-            Is this the meaning of it all?
-          </p>
-        </div>
-
-        {/* Notes */}
         <div style={{ borderTop: "1px solid #EDE1D0", paddingTop: 32 }}>
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 20, fontWeight: 400, color: "#3D2808", marginBottom: 16 }}>A note on this translation</h2>
           <p style={{ fontSize: 15, color: "#777", lineHeight: 1.8, marginBottom: 16 }}>This is a loose translation, done with plenty of license. The original Italian is one of the most famous poems of the twentieth century, and there are many faithful English versions by people more qualified than me. This is not one of those. It is an attempt to capture what the poem feels like to me rather than what it literally says.</p>
@@ -1328,12 +1365,13 @@ const pageMap = { linda: Linda, entropy: Entropy, biophilia: Biophilia, fragilem
 
 export default function IdeaMuseum() {
   const [page, setPage] = useState(null);
-  const goHome = () => setPage(null);
+  const goHome = () => { setPage(null); window.scrollTo(0, 0); };
+  const goTo = (id) => { setPage(id); window.scrollTo(0, 0); };
   if (page) {
     const Component = pageMap[page];
     if (Component) return <Component onBack={goHome} />;
     const idea = ideas.find((i) => i.id === page);
     return <Placeholder onBack={goHome} title={idea ? idea.title : "Coming Soon"} />;
   }
-  return <Home onNavigate={(id) => setPage(id)} />;
+  return <Home onNavigate={goTo} />;
 }
